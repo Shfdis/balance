@@ -1,6 +1,6 @@
-import json, recipe_table
+import json, RecipeTable
 
-class db_initialiser:
+class DbInitialiser:
     """
     Class for initializing the database with recipes.
 
@@ -18,12 +18,15 @@ class db_initialiser:
         Adds a recipe table to the database from a JSON file.
 
         Args:
-            file_number (int): The number of the JSON file to read from.
+            file_name (str): The name of the JSON file to read from.
         """
-        f = open(f'recipes/{file_name}', 'r')
-        data = json.load(f)
-        f.close()
-        self.tables[data["name"]] = recipe_table(data)
+        # Open the JSON file in read mode
+        with open(f'{file_name}', 'r') as f:
+            # Load the JSON data
+            data = json.load(f)
+        
+        # Create a new recipe_table object and add it to the tables dictionary
+        self.tables[data["name"]] = RecipeTable(data)
 
 
         

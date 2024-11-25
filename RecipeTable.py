@@ -1,6 +1,7 @@
 from sqlalchemy import *
+import sqlalchemy
 import engine
-class recipe_table:
+class RecipeTable:
     """
     Represents a table for recipes in the database.
 
@@ -34,9 +35,10 @@ class recipe_table:
         Args:
             measures (dict): A dictionary containing the measures of ingredients for the recipe.
         """
-        id = engine.session.query(self.table).order_by(self.table.id.desc()).first().id + 1
-        measures["id"] = id
-        self.table.insert().values(**measures)
+        with sqlalchemy.orm.sessionmaker(engine.engine) as session:
+            id = session.query(self.table).order_by(self.table.id.desc()).first().id + 1
+            measures["id"] = id
+            self.table.insert().values(**measures)
 
     def get_recipe_as_dict(self, id: int):
         """
@@ -48,6 +50,7 @@ class recipe_table:
         Returns:
             dict: A dictionary representing the recipe, or None if not found.
         """
-        recipe = engine.session.query(self.table).filter(self.table.id == id).first()
-        return recipe
+        with sqlalchemy.orm.sessionmaker(engine.engine) as session:
+            recipe = session.query(self.table).filter(self.table.id == id).first()
+            return recipe
 
