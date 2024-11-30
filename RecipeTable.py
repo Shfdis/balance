@@ -20,6 +20,7 @@ class RecipeTable:
             data (dict): A dictionary containing recipe data, including default measures and tastes.
         """
         columns = []
+        self.name = data["name"]
         columns.append(Column("id", Integer, primary_key=True, unique=True))
         for property, value in data["default_measures"].items():
             columns.append(Column(property, Float))
