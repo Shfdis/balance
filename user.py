@@ -80,5 +80,4 @@ class UsersRecipe(Base):
         self.user_id = user_id
         self.recipe_id = recipe_id
         self.table = table
-class User():
-    pass
+

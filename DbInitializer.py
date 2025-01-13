@@ -1,5 +1,5 @@
 import json, RecipeTable
-
+import os
 class DbInitialiser:
     """
     Class for initializing the database with recipes.
@@ -12,21 +12,33 @@ class DbInitialiser:
         Initializes the db_initialiser.
         """
         self.tables = {}
-
-    def add_table(self, file_name):
+        self.jsons = {}
+        self.load_tables()
+    def add_table(self, table: dict) -> None:
         """
-        Adds a recipe table to the database from a JSON file.
+        Adds a new recipe table to the database, or changes an existing table
 
         Args:
-            file_name (str): The name of the JSON file to read from.
+            table (dict): The dictionary for the new recipe table. The dictionary should contain the following keys:
+                - name (str): The name of the recipe table.
+                - tastes (list): A list of strings representing the tastes of the recipe.
+                - default_measures (dict): A dictionary containing the default measures for the ingredients.
+                - change_coeficients (dict): A dictionary containing the coefficients for changing recipe properties.
         """
-        # Open the JSON file in read mode
-        with open(f'{file_name}', 'r') as f:
-            # Load the JSON data
-            data = json.load(f)
-        
-        # Create a new recipe_table object and add it to the tables dictionary
-        self.tables[data["name"]] = RecipeTable(data)
-
-
-        
+        filename = table["name"] + '.json'
+        json.dump(table, open('recipes/' + filename, 'w'))
+        with open('recipes/' + filename) as json_file:
+            data = json.load(json_file)
+            self.tables[data["name"]] = RecipeTable.RecipeTable(data)
+            self.jsons[data["name"]] = data
+    def load_tables(self) -> None:
+        """
+        Loads all tables from folder recipes.
+        """
+        for filename in os.listdir('recipes'):
+            if filename.endswith(".json"):
+                with open('recipes/' + filename) as json_file:
+                    data = json.load(json_file)
+                    self.tables[data["name"]] = RecipeTable.RecipeTable(data)
+                    self.jsons[data["name"]] = data
+allTables = DbInitialiser()
