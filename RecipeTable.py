@@ -24,7 +24,8 @@ class RecipeTable:
         columns.append(Column("id", Integer, primary_key=True, unique=True))
         for property, value in data["default_measures"].items():
             columns.append(Column(property, Float))
-        self.table = Table(self.name, engine.engine, *columns, extend_existing=True)
+        self.table = Table(self.name, engine.metadata, *columns, extend_existing=True)
+        engine.metadata.create_all(engine.engine, checkfirst=True)
         self.tastes = data["tastes"]
         self.default_measures = data["default_measures"]
         self.coeficients = data["change_coeficients"]
@@ -36,10 +37,12 @@ class RecipeTable:
         Args:
             measures (dict): A dictionary containing the measures of ingredients for the recipe.
         """
-        with sqlalchemy.orm.sessionmaker(engine.engine) as session:
-            id = session.query(self.table).order_by(self.table.id.desc()).first().id + 1
+        with sqlalchemy.orm.sessionmaker(engine.engine)() as session:
+            id = session.query(self.table).order_by(self.table.c.id.desc()).first().id + 1 if session.query(self.table).count() > 0 else 0
             measures["id"] = id
-            self.table.insert().values(**measures)
+            session.execute(self.table.insert(), [measures])
+            session.commit()
+            session.close()
 
     def get_recipe_as_dict(self, id: int):
         """
@@ -51,7 +54,7 @@ class RecipeTable:
         Returns:
             dict: A dictionary representing the recipe, or None if not found.
         """
-        with sqlalchemy.orm.sessionmaker(engine.engine) as session:
+        with sqlalchemy.orm.sessionmaker(engine.engine)() as session:
             recipe = session.query(self.table).filter(self.table.id == id).first()
             return recipe
 

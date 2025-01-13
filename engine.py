@@ -1,7 +1,6 @@
-import sqlalchemy, DbInitializer
-login = input()
-password = input()
-engine = sqlalchemy.create_engine(f"sqlite:///{login}:{password}@localhost/balance.db")
-class Base(sqlalchemy.orm.DeclarativeBase):
-    pass
-allTables = DbInitializer.DbInitialiser()
+import sqlalchemy
+from sqlalchemy.orm import DeclarativeBase
+engine = sqlalchemy.create_engine(f"sqlite:///balance.db")
+class Base(DeclarativeBase): 
+    pass #DeclarativeBase
+metadata = sqlalchemy.MetaData()
