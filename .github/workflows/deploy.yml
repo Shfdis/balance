@@ -33,4 +33,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/${{ secrets.SERVER_USER }}/app
-            docker-compose restart api
+            docker-compose down api
+            docker-compose up -d api
