@@ -1,0 +1,13 @@
+services:
+    telegram-bot:
+        image: python:3.12-slim
+        container_name: telegram-bot
+        working_dir: /app
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/app
+        command: >
+            sh -c "pip install --no-cache-dir -r requirements.txt &&
+                   flask --app businessapi.py run"
+        restart: unless-stopped
