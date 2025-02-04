@@ -4,10 +4,10 @@ services:
         container_name: api
         working_dir: /app
         ports:
-            - "5000:5000"
+            - "8080:8080"
         volumes:
             - .:/app
         command: >
             sh -c "pip install --no-cache-dir -r requirements.txt &&
-                   flask --app businessapi.py run"
+                   waitress-serve businessapi:app"
         restart: unless-stopped
