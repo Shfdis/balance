@@ -1,15 +1,18 @@
 import flask
 from flask import request
 from flask import jsonify
-from flask import make_response
 from flask import abort
 import json
 import os
 
 print(os.getcwd())
-import DbInitializer
+from db import DbInitializer
 
-app = flask.Flask(__name__)
+blueprint = flask.Blueprint(
+    "recipes_blueprint",
+    __name__,
+    template_folder="templates",
+)
 
 
 class BusinessHandler:
@@ -26,19 +29,19 @@ class BusinessHandler:
 businessHandler = BusinessHandler()
 
 
-@app.route('/recipes', methods=['GET'])
+@blueprint.route('/recipes', methods=['GET'])
 def get_recipes():
     businessHandler.check(request)
     return jsonify(list(DbInitializer.allTables.jsons.values()))
 
 
-@app.route('/recipes/<id>', methods=['GET'])
+@blueprint.route('/recipes/<id>', methods=['GET'])
 def get_recipe(id):
     businessHandler.check(request)
     return jsonify(DbInitializer.allTables.jsons[id])
 
 
-@app.route('/recipes', methods=['POST'])
+@blueprint.route('/recipes', methods=['POST'])
 def add_recipe():
     businessHandler.check(request)
     print(request.json)

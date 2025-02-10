@@ -1,7 +1,11 @@
-from flask import Flask, request, redirect
+from flask import Flask
 import logging
 from flask_restful import Api
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager
+
+import blueprints.recipes.recipes
+import db.db_utils.db_session
+from db.DbInitializer import DbInitialiser
 from config import *
 
 app = Flask(__name__)
@@ -23,3 +27,12 @@ def index_map():
     return "ok"
 
 
+def deploy():
+    db.db_utils.db_session.global_init("balance.db")
+    allTables = DbInitialiser()  # FIXME: подумать над лучшей реализацией динамических таблиц.
+    app.register_blueprint(blueprints.recipes.recipes.blueprint)
+
+deploy()
+
+if __name__ == '__main__':
+    app.run(debug=True)

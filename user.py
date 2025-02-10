@@ -1,5 +1,4 @@
 from sqlalchemy import *
-from engine import *
 import bcrypt
 
 def generate_hash(password: str) -> str:

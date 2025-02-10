@@ -1,6 +1,7 @@
-from engine import *
+from db.db_utils.db_session import create_session
 from user import *
-from DbInitializer import *
+
+
 class Recipe:
     __slots__ = ["id", "coef", "measures", "recipe_info", "table"]
 
@@ -28,7 +29,7 @@ class Recipe:
         Args:
             deltas (dict): A dictionary containing the properties and their delta changes.
         """
-        with sqlalchemy.orm.sessionmaker(engine.engine) as session:
+        with create_session() as session:
             # Create a new measures dictionary by copying the current measures
             newMeasures = self.measures.copy()
 
@@ -49,11 +50,9 @@ class Recipe:
 
             # Update the coefficient in the user's recipe record
             recipeToUser = select(UsersRecipe).where(UsersRecipe.recipe_id == self.id)
-            to_change = session.stmt(recipeToUser).one()
+
+            to_change = session.stmt(recipeToUser).one() # FIXME: возможно требует изменения.
             to_change.coef = self.coef
 
             # Commit the transaction
             session.commit()
-
-            
-

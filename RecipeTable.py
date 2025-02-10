@@ -1,6 +1,5 @@
 from sqlalchemy import *
 import sqlalchemy
-import engine
 class RecipeTable:
     """
     Represents a table for recipes in the database.
