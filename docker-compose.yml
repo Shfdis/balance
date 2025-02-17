@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
   db:
     image: postgres:latest
-    container_name: balance-db
+    container_name: db
     environment:
       POSTGRES_USER: postgresql
       POSTGRES_PASSWORD: postgresql
