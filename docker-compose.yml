@@ -10,6 +10,8 @@ services:
     command: >
       sh -c "pip install --no-cache-dir -r requirements.txt &&
              waitress-serve businessapi:app"
+    depends_on:
+          - db
     restart: unless-stopped
   db:
     image: postgres:latest
