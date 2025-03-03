@@ -29,10 +29,11 @@ def index_map():
 
 def deploy():
     db.db_utils.db_session.global_init("balance.db")
-    allTables = DbInitialiser()  # FIXME: подумать над лучшей реализацией динамических таблиц.
     app.register_blueprint(blueprints.recipes.recipes.blueprint)
+    app.register_blueprint(blueprints.formHandler.forms.blueprint)
+    app.register_blueprint(blueprints.recipe_user.recipes_users.blueprint)
 
-deploy()
 
 if __name__ == '__main__':
+    deploy()
     app.run(debug=True)

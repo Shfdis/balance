@@ -1,1 +1,0 @@
-{"name": "espresso", "tastes": ["bitter", "sour", "strong"], "default_measures": {"ground_coffee": 18, "water": 36}, "change_coeficients": {"ground_coffee": {"bitter": 1}}}
