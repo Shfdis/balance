@@ -1,0 +1,4 @@
+### GET request to test get users token
+GET http://localhost:5000/usersToken?recipe_id=1&user_id=testUser123
+
+###

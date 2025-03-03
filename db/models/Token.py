@@ -8,7 +8,7 @@ class Token(SqlAlchemyBase, SerializerMixin):
     __tablename__ = 'users_tokens'
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    token_id = sqlalchemy.Column(sqlalchemy.String)
+    token = sqlalchemy.Column(sqlalchemy.String)
     recipe_user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users_recipes.id'))
-    recipe_user = orm.relationship("Recipe")
+    recipe_user = orm.relationship("RecipeUser")
 

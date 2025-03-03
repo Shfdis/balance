@@ -9,7 +9,7 @@ class RecipeUser(SqlAlchemyBase, SerializerMixin):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.String)
-    change_coef = sqlalchemy.Column(sqlalchemy.Float)
+    change_coef = sqlalchemy.Column(sqlalchemy.Float, default=1)
     recipe_json_data = sqlalchemy.Column(sqlalchemy.String)
 
     recipe_origin_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('recipes.id'))
