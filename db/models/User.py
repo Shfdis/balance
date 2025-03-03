@@ -11,4 +11,5 @@ class User(SqlAlchemyBase, SerializerMixin, UserMixin):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    pwd = sqlalchemy.Column(sqlalchemy.String(64), nullable=False, unique=True)
+    login = sqlalchemy.Column(sqlalchemy.String(32), nullable=False, unique=True)
+    pwd = sqlalchemy.Column(sqlalchemy.String(64), nullable=False)
