@@ -1,10 +1,9 @@
 import sqlalchemy
 from sqlalchemy import orm
-from sqlalchemy_serializer import SerializerMixin
 from db.db_utils.db_session import SqlAlchemyBase
 
 
-class Token(SqlAlchemyBase, SerializerMixin):
+class Token(SqlAlchemyBase):
     __tablename__ = 'users_tokens'
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)

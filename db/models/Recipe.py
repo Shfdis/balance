@@ -2,11 +2,10 @@ import datetime
 import json
 
 import sqlalchemy
-from sqlalchemy_serializer import SerializerMixin
 from db.db_utils.db_session import SqlAlchemyBase
 
 
-class Recipe(SqlAlchemyBase, SerializerMixin):
+class Recipe(SqlAlchemyBase):
     __tablename__ = 'recipes'
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
