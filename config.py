@@ -1,1 +1,1 @@
-SECRET_KEY = "ba51eb9d778242cb02cd44aca2fe37af5ac011f5df3ed020e86affa388303613"
+SECRET_KEY = '"zsexdcfhgvhbjnkelrmwverjb@4o3i#iu54ljrev;@nlkjbenrlvjren"'
