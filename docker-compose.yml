@@ -11,7 +11,23 @@ services:
       sh -c "pip install --no-cache-dir -r requirements.txt &&
              waitress-serve businessapi:app"
     depends_on:
-          - db
+      - db
+    restart: unless-stopped
+  frontend1:
+    container_name: frontend1
+    build:
+      context: ./frontend1
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+  frontend2:
+    container_name: frontend2
+    build:
+      context: ./frontend2
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
     restart: unless-stopped
   db:
     image: postgres:latest
