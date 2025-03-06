@@ -9,7 +9,7 @@ from db.db_utils.db_session import create_session
 from db.models.RecipeUser import RecipeUser
 from db.models.Recipe import Recipe
 from db.models.Token import Token
-
+from recipe_handler import RecipeHandler
 blueprint = flask.Blueprint(
     "form_blueprint",
     __name__,
@@ -29,8 +29,9 @@ def submit_form(token):
         if token is None:
             return abort(403)
         recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
-        recipe_user.recipe_origin # - конкретный рецепт пользователя
-        print(request.json, token)
+        handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
+        handler.alter_recipe(request.json)
+        session.commit()
     return {"status": "ok"}
 
     

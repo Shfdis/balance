@@ -58,7 +58,7 @@ def add_user_recipe(recipe_id, user_id):
             try:
                 newUserRecipe = RecipeUser(
                     user_id=user_id,
-                    recipe_json_data=json.dumps(session.query(Recipe).filter_by(id=recipe_id).first().default_ingredients),
+                    recipe_json_data=session.query(Recipe).filter_by(id=recipe_id).first().default_ingredients,
                     recipe_origin_id=int(recipe_id)
                 )
             except Exception as e:
