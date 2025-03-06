@@ -12,6 +12,7 @@ from db.db_utils.db_session import create_session
 from db.models.Recipe import Recipe
 from db.models.RecipeUser import RecipeUser
 from db.models.Token import Token
+from utils.AuthHandler import AUTH_HANDLER
 
 blueprint = flask.Blueprint(
     "recipes_users_blueprint",
@@ -25,6 +26,7 @@ def get_users_token():
     Функция принимает параметры запроса с полями recipe_id и user_id и формирует уникальный для пользователя токен.
     Returns: str - токен для пользователя
     """
+    AUTH_HANDLER.check_login(request)
     with create_session() as session:
         with session.begin():
             token_id = uuid.uuid4()
@@ -53,6 +55,7 @@ def add_user_recipe(recipe_id, user_id):
     """
     Функция добавляет пользовательский рецепт в базу данных.
     """
+    AUTH_HANDLER.check_login(request)
     with create_session() as session:
         with session.begin():
             try:
