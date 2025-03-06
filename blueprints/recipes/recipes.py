@@ -59,8 +59,8 @@ def update_recipes():
                     new_recipe = Recipe()
                     new_recipe.id = recipe["id"]
                     new_recipe.name = recipe["name"]
-                    new_recipe.default_ingredients = json.dumps(recipe["default_measures"])
-                    new_recipe.change_coefficients = json.dumps(recipe["change_coeficients"])
+                    new_recipe.default_ingredients = json.dumps(recipe["default_ingredients"])
+                    new_recipe.change_coefficients = json.dumps(recipe["change_coefficients"])
                     new_recipe.tastes = json.dumps(recipe["tastes"])
                     session.add(new_recipe)
             except Exception as e:

@@ -1,6 +1,7 @@
 from flask import Flask
 import logging
 from flask_restful import Api
+from flask_cors import CORS
 from flask_login import LoginManager
 
 import blueprints.recipes.recipes
@@ -10,6 +11,7 @@ import db.db_utils.db_session
 from config import *
 
 app = Flask(__name__)
+CORS(app)
 app.config['SECRET_KEY'] = SECRET_KEY
 
 api = Api(app)
