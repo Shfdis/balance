@@ -7,17 +7,18 @@ from db.db_utils import __all_models, db_session
 
 from db.db_utils.db_session import create_session
 from db.models.RecipeUser import RecipeUser
+from db.models.Recipe import Recipe
 from db.models.Token import Token
-
+from recipe_handler import RecipeHandler
 blueprint = flask.Blueprint(
     "form_blueprint",
     __name__,
 )
 
-@blueprint.route('/tastes/<user_recipe_id>', methods=['GET'])
-def get_all_tastes(user_recipe_id):
+@blueprint.route('/tastes/<recipe_id>', methods=['GET'])
+def get_all_tastes(recipe_id):
     with db_session.create_session() as session:
-        tastes = session.query(RecipeUser).where(RecipeUser.id == user_recipe_id).first().recipe_origin.tastes
+        tastes = session.query(Recipe).where(Recipe.id == recipe_id).first().tastes
         return jsonify(json.loads(tastes))
 
         
@@ -28,9 +29,9 @@ def submit_form(token):
         if token is None:
             return abort(403)
         recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
-        recipe_user.recipe_origin # - конкретный рецепт пользователя
-        print(request.json, token)
-
+        handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
+        handler.alter_recipe(request.json)
+        session.commit()
     return {"status": "ok"}
 
     

@@ -45,4 +45,24 @@ def get_users_token():
                 recipe_user_id=recipe_user.id
             )
             session.add(token)
+            session.commit()
     return jsonify({"token": str(token_id)})
+
+@blueprint.route('/userRecipe/<recipe_id>/<user_id>', methods=['PUT'])
+def add_user_recipe(recipe_id, user_id):
+    """
+    Функция добавляет пользовательский рецепт в базу данных.
+    """
+    with create_session() as session:
+        with session.begin():
+            try:
+                newUserRecipe = RecipeUser(
+                    user_id=user_id,
+                    recipe_json_data=session.query(Recipe).filter_by(id=recipe_id).first().default_ingredients,
+                    recipe_origin_id=int(recipe_id)
+                )
+            except Exception as e:
+                pass
+            session.add(newUserRecipe)
+            session.commit()
+    return jsonify({"status": "ok"})
