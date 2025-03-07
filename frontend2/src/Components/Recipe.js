@@ -12,8 +12,8 @@ const showTastes = (props, onDelete, onSomethingChanged) => {
 }
 const showMeasures = (props, onDelete, onSomethingChanged) => {
     let ans = []
-    for (let i = 0; i < props.json.default_measures.length; i++) {
-        let cur = props.json.default_measures[i]
+    for (let i = 0; i < props.json.default_ingredients.length; i++) {
+        let cur = props.json.default_ingredients[i]
         ans.push(<Ingredients json={cur} key={cur.id} onDelete={() => onDelete(cur.id)} onSomethingChanged={onSomethingChanged}/>)
     }
     return (<div>
@@ -38,9 +38,9 @@ export class Recipe extends Component {
     }
     onIngredientChanged(json) {
         let prev = this.state
-        for (let i = 0; i < prev.json.default_measures.length; i++) {
-            if (prev.json.default_measures[i].id === json.id) {
-                prev.json.default_measures[i] = json
+        for (let i = 0; i < prev.json.default_ingredients.length; i++) {
+            if (prev.json.default_ingredients[i].id === json.id) {
+                prev.json.default_ingredients[i] = json
             }
         }
         this.setState(prev)
@@ -82,30 +82,30 @@ export class Recipe extends Component {
     }
     deleteIngredient(key){  
         let prev = this.state
-        prev.json.default_measures = prev.json.default_measures.filter(el => el.id !== key)
+        prev.json.default_ingredients = prev.json.default_ingredients.filter(el => el.id !== key)
         this.setState(prev) 
         this.state.onSomethingChanged(this.state.json)
     }
     addIngredient(){
         let prev = this.state
-        if (prev.json.default_measures.length === 0) {
-            prev.json.default_measures.push({"id": 0, "name": "", "value": 0})
+        if (prev.json.default_ingredients.length === 0) {
+            prev.json.default_ingredients.push({"id": 0, "name": "", "value": 0})
         }
         else {
-            let ind = prev.json.default_measures[prev.json.default_measures.length - 1].id + 1
-            prev.json.default_measures.push({"id": ind, "name": "", "value": 0})
+            let ind = prev.json.default_ingredients[prev.json.default_ingredients.length - 1].id + 1
+            prev.json.default_ingredients.push({"id": ind, "name": "", "value": 0})
         }
         this.setState(prev)
         this.state.onSomethingChanged(this.state.json)
     }
     deleteCoeficients(key){
         let prev = this.state
-        prev.json.change_coeficients = prev.json.change_coeficients.filter(el => el.id !== key)
+        prev.json.change_coefficients = prev.json.change_coefficients.filter(el => el.id !== key)
         this.setState(prev)
         this.state.onSomethingChanged(this.state.json)
     }
     avaliableIngredients(){
-        let prev = this.state.json.default_measures
+        let prev = this.state.json.default_ingredients
         let ans = []
         for(let i = 0; i < prev.length; i++){
             ans.push(prev[i].name)
@@ -122,18 +122,18 @@ export class Recipe extends Component {
     }
     render() {
         return (
-            <div className='recipe'>
+            <div>
             <label>
-                <button onClick={this.state.onDelete} className='delete'>Удалить рецепт</button>
+                <button onClick={this.state.onDelete}>Удалить рецепт</button>
                 <p>Имя рецепта</p>
-                <textarea value={this.state.json.name} onChange={this.changeName} className='text-area'/>
+                <textarea value={this.state.json.name} onChange={this.changeName}/>
             </label>
             <p>Вкусы</p>
             {showTastes(this.state, this.deleteTaste, this.onTasteChanged)}
-            <button onClick={this.addTaste} className='add'>Добавить вкус</button>
+            <button onClick={this.addTaste}>Добавить вкус</button>
             <p>Ингредиенты</p>
             {showMeasures(this.state, this.deleteIngredient, this.onIngredientChanged)}
-            <button onClick={this.addIngredient} className='add'>Добавить ингредиент</button>
+            <button onClick={this.addIngredient}>Добавить ингредиент</button>
             </div>
         )
     }

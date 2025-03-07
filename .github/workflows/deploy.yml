@@ -34,4 +34,4 @@ jobs:
          script: |
            cd /home/${{ secrets.SERVER_USER }}/app
            docker-compose stop api db frontend1 frontend2
-           docker-compose up -d api db frontend1 frontend2
+           docker-compose --build up -d api db frontend1 frontend2
