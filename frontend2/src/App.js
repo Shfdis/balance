@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './Pages/loginPage';
 import Home from './Pages/Home';
 import Coef from './Pages/Coef';
-const APIUrl = "http://127.0.0.1:5000"
+const APIUrl = "http://192.144.13.84:8080"
 function App() {
   return(
     <BrowserRouter>
