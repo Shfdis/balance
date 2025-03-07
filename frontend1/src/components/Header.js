@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { GiScales } from "react-icons/gi";
 export default function Header() {
     return (
       <header>
-        <div>
+        <div className='logo2'>
             <span className='logo'>Balance</span>
-            <GiScales className='shop-cart-button' />
+            <GiScales className='libra-icon' />
             </div>
             <div className='presentation'></div>
       </header>

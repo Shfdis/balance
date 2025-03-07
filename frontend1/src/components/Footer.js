@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className='footer'>
         Все права защищены &copy;
     </footer>
   )
