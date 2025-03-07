@@ -17,7 +17,14 @@ export class TasteCoefs extends Component {
 
     changeValue(event) {
         let prev = this.state
-        prev.json.value = event.target.value
+        try {
+            prev.json.value = Number(event.target.value)
+        } catch (e) {
+            prev.json.value = 0
+        }
+        if (isNaN(prev.json.value)) {
+            prev.json.value = 0
+        }
         this.setState(prev)
         this.state.onSomethingChanged(this.state.json)
     }

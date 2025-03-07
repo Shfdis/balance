@@ -18,7 +18,15 @@ export class Ingredients extends Component {
     }
     changeValue(event){
         var prevState = this.state
-        prevState.json.value = event.target.value
+        try {
+            prevState.json.value = Number(event.target.value)
+        }
+        catch (e) {
+            prevState.json.value = 0
+        }
+        if (isNaN(prevState.json.value)) {
+            prevState.json.value = 0
+        }
         this.setState(prevState)
         this.state.onSomethingChanged(this.state.json)
     }
