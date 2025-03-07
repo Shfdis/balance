@@ -3,10 +3,10 @@ name: Deploy to Server
 on:
  push:
    branches:
-     - romanandr
+     - master
  pull_request:
    branches:
-     - romanandr
+     - master
 
 jobs:
  deploy:
