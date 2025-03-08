@@ -61,7 +61,7 @@ export class Coef extends Component {
             <div>
                 {showRecipesCoefs(this.state, this.somethingChanged)}
                 <form onSubmit={this.sendData}>
-                    <input type="submit" className='submit' />
+                    <input type="submit"    />
                 </form>
             </div>
         

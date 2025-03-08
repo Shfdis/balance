@@ -74,25 +74,25 @@ export class Home extends Component {
                 name: "", 
                 tastes: [],
                 default_ingredients: [],
-                change_coeficients: []}
+                change_coefficients: []}
         } else {
             prev.json[len] = {
                 id: prev.json[len - 1].id + 1,
                 name: "", 
                 tastes: [],
                 default_ingredients: [],
-                change_coeficients: []}
+                change_coefficients: []}
         }
         this.setState(prev)
     }
     render() {
         return (
         <div>
+        <button onClick={this.addRecipe}>Добавить рецепт</button>
         {showRecipes(this.state, this.deleteRecipe, this.somethingChanged)}
-        <button onClick={this.addRecipe} className='add'>Добавить рецепт</button>
         <form onSubmit={this.handleSubmit}>
             
-            <input type='submit' className='submit'></input>
+            <input type='submit'></input>
         </form>
         </div>
         )
