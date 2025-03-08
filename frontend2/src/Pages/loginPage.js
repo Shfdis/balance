@@ -34,10 +34,10 @@ export class LoginPage extends Component {
         return (
             <form onSubmit={(event) => fetchAPI(event, this.state.URL + "/recipes?password=" + this.state.password, this.handleSubmit)}>
                 <label>
-                    <h2>Введите пароль </h2>
+                    <p>Введите пароль </p>
                     <textarea value={this.state.value} onChange={this.handleChange} className='text-area'/>
                 </label>
-                <input type='submit' value="Отправить" className='submit' />
+                <input type='submit' value="Отправить" />
             </form>
         )
     }
