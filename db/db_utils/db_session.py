@@ -8,16 +8,16 @@ SqlAlchemyBase = dec.declarative_base()
 __factory = None
 
 
-def global_init(db_file):
+def global_init(db_user, db_password, db_host, db_port, db_name):
     global __factory
 
     if __factory:
         return
 
-    if not db_file or not db_file.strip():
-        raise Exception("Необходимо указать файл базы данных.")
+    if not db_name or not db_name.strip():
+        raise Exception("Необходимо указать имя базы данных.")
 
-    conn_str = f'sqlite:///{db_file.strip()}?check_same_thread=False'
+    conn_str = f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
     print(f"Подключение к базе данных по адресу {conn_str}")
 
     engine = sa.create_engine(conn_str, echo=True)
