@@ -87,15 +87,15 @@ export class Home extends Component {
     }
     render() {
         return (
-        <div>
-        <button onClick={this.addRecipe}>Добавить рецепт</button>
-        {showRecipes(this.state, this.deleteRecipe, this.somethingChanged)}
-        <form onSubmit={this.handleSubmit}>
-            
-            <input type='submit'></input>
-        </form>
-        </div>
-        )
+            <div>
+            {showRecipes(this.state, this.deleteRecipe, this.somethingChanged)}
+            <button onClick={this.addRecipe} className='add'>Добавить рецепт</button>
+            <form onSubmit={this.handleSubmit}>
+                
+                <input type='submit' className='submit'></input>
+            </form>
+            </div>
+            )
     }
 }
 

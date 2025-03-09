@@ -122,18 +122,18 @@ export class Recipe extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='recipe'>
             <label>
-                <button onClick={this.state.onDelete}>Удалить рецепт</button>
+                <button onClick={this.state.onDelete} className='delete'>Удалить рецепт</button>
                 <p>Имя рецепта</p>
-                <textarea value={this.state.json.name} onChange={this.changeName}/>
+                <textarea value={this.state.json.name} onChange={this.changeName} className='text-area'/>
             </label>
             <p>Вкусы</p>
             {showTastes(this.state, this.deleteTaste, this.onTasteChanged)}
-            <button onClick={this.addTaste}>Добавить вкус</button>
+            <button onClick={this.addTaste} className='add'>Добавить вкус</button>
             <p>Ингредиенты</p>
             {showMeasures(this.state, this.deleteIngredient, this.onIngredientChanged)}
-            <button onClick={this.addIngredient}>Добавить ингредиент</button>
+            <button onClick={this.addIngredient} className='add'>Добавить ингредиент</button>
             </div>
         )
     }
