@@ -50,7 +50,7 @@ def get_users_token():
             session.commit()
     return jsonify({"token": str(token_id)})
 
-@blueprint.route('/userRecipe/<recipe_id>/<user_id>', methods=['PUT'])
+@blueprint.route('/userRecipe/<recipe_id>/<user_id>', methods=['PUT', 'GET'])
 def add_user_recipe(recipe_id, user_id):
     """
     Функция добавляет пользовательский рецепт в базу данных.
