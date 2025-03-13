@@ -11,9 +11,6 @@ class App extends React.Component {
       APIUrl: "http://192.144.13.84:8080",
       container: []
     }
-    for (var i = 0; i < this.state.elements.length; i++) {
-      container[i] = 0
-    }
     this.loadData = this.loadData.bind(this)
     this.submit = this.submit.bind(this)
     this.choose = this.choose.bind(this)
@@ -24,7 +21,7 @@ class App extends React.Component {
   loadData(){
     let params = new URL(document.location.toString()).searchParams;
     let id = params.get("recipe_id").toString();
-    container = []
+    let container = []
     fetch(this.state.APIUrl + "/tastes/" + id)
     .then(response => response.json())
     .then(data => {
