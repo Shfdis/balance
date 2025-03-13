@@ -25,11 +25,11 @@ def get_all_tastes(recipe_id):
 @blueprint.route('/submit/<token>', methods=['POST'])
 def submit_form(token):
     with create_session() as session:
-        token = session.query(Token).filter_by(token=token).first()
-        if token is None:
-            return abort(403)
-        recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
         try:
+            token = session.query(Token).filter_by(token=token).first()
+            if token is None:
+                return abort(403)
+            recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
             handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
             handler.alter_recipe(request.json)
         except Exception as e:
