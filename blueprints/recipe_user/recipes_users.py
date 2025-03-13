@@ -76,6 +76,6 @@ def add_user_recipe(recipe_id, user_id):
             with session.begin():
                 try:
                     recipe_user = session.query(RecipeUser).filter_by(user_id=user_id).first()
-                    return jsonify({"recipe": recipe_user.recipe_json_data})
+                    return jsonify({"recipe": json.loads(recipe_user.recipe_json_data)})
                 except Exception as e:
                     abort(401)
