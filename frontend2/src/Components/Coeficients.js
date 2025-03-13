@@ -45,7 +45,7 @@ export class Coeficients extends Component {
         let prev = this.state
         prev.json.tastes[l] = {
             id: l > 0 ? this.state.json.tastes[l - 1].id + 1 : 0,
-            name: "",
+            name: this.state.json.tastes.length > 0 ? this.state.json.tastes[0].name : "",
             value: 0
         }
         this.setState(prev)

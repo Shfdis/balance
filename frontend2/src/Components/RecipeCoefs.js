@@ -44,7 +44,7 @@ export class RecipeCoefs extends Component {
         let len = prev.json.change_coefficients.length
         prev.json.change_coefficients.push({
             id: len > 0 ? prev.json.change_coefficients[len - 1].id + 1 : 0,
-            name: "",
+            name: this.avaliableIngredients() > 0 ? this.avaliableIngredients()[0].name : "",
             tastes: []
         })
         this.setState(prev)
