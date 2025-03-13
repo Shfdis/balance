@@ -2,21 +2,21 @@ import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Elements } from "./components/Elements";
-var container = []
-
 class App extends React.Component {
   constructor(props){
     super(props)
     
     this.state = {
       elements: [],
-      APIUrl: "http://192.144.13.84:8080"
+      APIUrl: "http://192.144.13.84:8080",
+      container: []
     }
     for (var i = 0; i < this.state.elements.length; i++) {
       container[i] = 0
     }
     this.loadData = this.loadData.bind(this)
     this.submit = this.submit.bind(this)
+    this.choose = this.choose.bind(this)
   }
   componentDidMount(){
     this.loadData()
@@ -24,19 +24,21 @@ class App extends React.Component {
   loadData(){
     let params = new URL(document.location.toString()).searchParams;
     let id = params.get("recipe_id").toString();
+    container = []
     fetch(this.state.APIUrl + "/tastes/" + id)
     .then(response => response.json())
     .then(data => {
       for (let i = 0; i < data.length; i++) { 
         data[i] = data[i].name
+        container[i] = 0
       }
-      this.setState({elements: data})
+      this.setState({elements: data, container: container})
     })
   }
   submit(){
     var result = {}
     for (var i = 0; i < this.state.elements.length; i++) {
-      result[this.state.elements[i]] = (container[i] / 20)
+      result[this.state.elements[i]] = (this.state.container[i] / 20)
     }
     let params = new URL(document.location.toString()).searchParams;
     let token = params.get("token").toString();
@@ -59,7 +61,7 @@ class App extends React.Component {
     );
   }
   choose(value, name){
-    container[name] = value
+    this.state.container[name] = value
   }
 }
 export default App;
