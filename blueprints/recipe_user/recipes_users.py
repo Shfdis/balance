@@ -35,7 +35,7 @@ def get_users_token():
                 default_recipe_data = session.query(Recipe).filter_by(id=request.args["recipe_id"]).first()
                 recipe_user_last = session.query(RecipeUser).order_by(RecipeUser.id.desc()).first()
                 recipe_user = RecipeUser(
-                    id=recipe_user_last.id if recipe_user_last is not None else 1,
+                    id=recipe_user_last.id + 1 if recipe_user_last is not None else 1,
                     recipe_origin_id=int(request.args["recipe_id"]),
                     user_id=request.args["user_id"],
                     recipe_json_data=default_recipe_data.default_ingredients,
@@ -47,7 +47,6 @@ def get_users_token():
                 recipe_user_id=recipe_user.id
             )
             session.add(token)
-            session.commit()
     return jsonify({"token": str(token_id)})
 
 @blueprint.route('/userRecipe/<recipe_id>/<user_id>', methods=['PUT', 'GET'])
@@ -57,7 +56,6 @@ def add_user_recipe(recipe_id, user_id):
     """
     AUTH_HANDLER.check_login(request)
     if request.method == "PUT":
-        
         with create_session() as session:
             with session.begin():
                 try:
@@ -69,7 +67,6 @@ def add_user_recipe(recipe_id, user_id):
                 except Exception as e:
                     pass
                 session.add(newUserRecipe)
-                session.commit()
         return jsonify({"status": "ok"})
     if request.method == "GET":
         with create_session() as session:
