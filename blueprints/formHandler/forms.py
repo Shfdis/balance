@@ -33,17 +33,17 @@ def get_all_tastes(recipe_id):
 @blueprint.route('/submit/<token>', methods=['POST'])
 def submit_form(token):
     with create_session() as session:
-        try:
-            token = session.query(Token).filter_by(token=token).first()
-            if token is None:
-                return abort(403)
-            recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
-            session.delete(token)
-            handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
-            handler.alter_recipe(request.json, session)
-        except Exception as e:
-            logger.error(e)
-            return {"status": "error", "reason": str(e)}
+        # try: FIXME
+        token = session.query(Token).filter_by(token=token).first()
+        if token is None:
+            return abort(403)
+        recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
+        session.delete(token)
+        handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
+        handler.alter_recipe(request.json, session)
+        # except Exception as e:
+        #     logger.error(e)
+        #     return {"status": "error", "reason": str(e)}
         session.commit()
     return {"status": "ok"}
 
