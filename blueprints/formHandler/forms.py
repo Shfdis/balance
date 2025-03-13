@@ -1,4 +1,5 @@
 import json
+import logging
 
 import flask
 from flask import abort, jsonify, request
@@ -15,6 +16,13 @@ blueprint = flask.Blueprint(
     __name__,
 )
 
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG
+)
+
+logger = logging.getLogger(__name__)
+
 @blueprint.route('/tastes/<recipe_id>', methods=['GET'])
 def get_all_tastes(recipe_id):
     with db_session.create_session() as session:
@@ -30,9 +38,11 @@ def submit_form(token):
             if token is None:
                 return abort(403)
             recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
+            session.delete(token)
             handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
-            handler.alter_recipe(request.json)
+            handler.alter_recipe(request.json, session)
         except Exception as e:
+            logger.error(e)
             return {"status": "error", "reason": str(e)}
         session.commit()
     return {"status": "ok"}

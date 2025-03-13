@@ -15,7 +15,7 @@ Content-Type: application/json
         "name": ""
       }
     ],
-    "default_measures": [
+    "default_ingredients": [
       {
         "id": 0,
         "name": "молоко",
@@ -27,7 +27,7 @@ Content-Type: application/json
         "value": "4"
       }
     ],
-    "change_coeficients": []
+    "change_coefficients": []
   },
   {
     "id": 1,
@@ -38,14 +38,14 @@ Content-Type: application/json
         "name": "горький"
       }
     ],
-    "default_measures": [
+    "default_ingredients": [
       {
         "id": 0,
         "name": "карамель",
         "value": "40"
       }
     ],
-    "change_coeficients": []
+    "change_coefficients": []
   }
 ]
 
