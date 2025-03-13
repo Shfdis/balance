@@ -24,7 +24,7 @@ class RecipeHandler:
         self.changeCoefficients = json.loads(recipe.change_coefficients)
         map = {}
         for ingridient in self.changeCoefficients:
-            map.update({ingridient["name"], {}})
+            map.update({ingridient["name"]: {}})
             for i in ingridient["tastes"]:
                 map[ingridient["name"]].update({i["name"]: i["value"]})
         self.changeCoefficients = map
