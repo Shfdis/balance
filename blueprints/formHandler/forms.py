@@ -29,8 +29,11 @@ def submit_form(token):
         if token is None:
             return abort(403)
         recipe_user = session.query(RecipeUser).filter_by(id=token.recipe_user_id).first()
-        handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
-        handler.alter_recipe(request.json)
+        try:
+            handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
+            handler.alter_recipe(request.json)
+        except Exception as e:
+            return {"status": e.__str__}
         session.commit()
     return {"status": "ok"}
 

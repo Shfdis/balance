@@ -15,14 +15,14 @@ class RecipeHandler:
         self.measures = json.loads(usersRecipe.recipe_json_data)
         map = {}
         for measure in self.measures:
-            map[measure["name"]] = [measure["value"], measure["id"]]
+            map.update({measure["name"]: [measure["value"], measure["id"]]})
         self.measures = map
         self.changeCoefficients = json.loads(recipe.change_coefficients)
         map = {}
         for ingridient in self.changeCoefficients:
-            map[ingridient["name"]] = {}
+            map.update({ingridient["name"], {}})
             for i in ingridient["tastes"]:
-                map[ingridient["name"]][i["name"]] = i["value"]
+                map[ingridient["name"]].update({i["name"]: i["value"]})
         self.changeCoefficients = map
     def alter_recipe(self, deltas: dict):
         """
@@ -49,7 +49,6 @@ class RecipeHandler:
                         newMeasures[ingridient][0] += coef * value[0] * self.coef * deltas[taste]
 
                 # Update the measures and apply changes to the database
-                self.measures = newMeasures
                 self.measures = []
                 for (name, (value, id)) in newMeasures.items():
                     self.measures.append({"name": name, "value": value, "id": id})
