@@ -17,7 +17,7 @@ def global_init(db_user, db_password, db_host, db_port, db_name):
     if not db_name or not db_name.strip():
         raise Exception("Необходимо указать имя базы данных.")
 
-    conn_str = f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}'
+    conn_str = f'sqlite:///balance.db'
     print(f"Подключение к базе данных по адресу {conn_str}")
 
     engine = sa.create_engine(conn_str, echo=True)

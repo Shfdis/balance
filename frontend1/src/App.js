@@ -8,7 +8,7 @@ class App extends React.Component {
     
     this.state = {
       elements: [],
-      APIUrl: "http://192.144.13.84:8080",
+      APIUrl: "http://localhost:5000",
       container: []
     }
     this.loadData = this.loadData.bind(this)

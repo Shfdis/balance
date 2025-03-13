@@ -44,9 +44,10 @@ class RecipeHandler:
                 # Iterate through the coeficients of the recipe table
                 for (ingridient, value) in self.measures.items():
                     # Iterate through the taste and coefficient pairs
-                    for taste, coef in self.changeCoefficients[ingridient].items():
-                        # Adjust the measures of the ingridient by the given delta
-                        newMeasures[ingridient][0] += coef * value[0] * self.coef * deltas[taste]
+                    if ingridient in self.changeCoefficients:
+                        for taste, coef in self.changeCoefficients[ingridient].items():
+                            # Adjust the measures of the ingridient by the given delta
+                            newMeasures[ingridient][0] += coef * value[0] * self.coef * deltas[taste]
 
                 # Update the measures and apply changes to the database
                 self.measures = []
