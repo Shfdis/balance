@@ -33,7 +33,7 @@ def submit_form(token):
             handler = RecipeHandler(recipe_user, recipe_user.recipe_origin)
             handler.alter_recipe(request.json)
         except Exception as e:
-            return {"status": e.__str__}
+            return {"status": "error", "reason": str(e)}
         session.commit()
     return {"status": "ok"}
 
