@@ -56,16 +56,26 @@ def add_user_recipe(recipe_id, user_id):
     Функция добавляет пользовательский рецепт в базу данных.
     """
     AUTH_HANDLER.check_login(request)
-    with create_session() as session:
-        with session.begin():
-            try:
-                newUserRecipe = RecipeUser(
-                    user_id=user_id,
-                    recipe_json_data=session.query(Recipe).filter_by(id=recipe_id).first().default_ingredients,
-                    recipe_origin_id=int(recipe_id)
-                )
-            except Exception as e:
-                pass
-            session.add(newUserRecipe)
-            session.commit()
-    return jsonify({"status": "ok"})
+    if request.method == "PUT":
+        
+        with create_session() as session:
+            with session.begin():
+                try:
+                    newUserRecipe = RecipeUser(
+                        user_id=user_id,
+                        recipe_json_data=session.query(Recipe).filter_by(id=recipe_id).first().default_ingredients,
+                        recipe_origin_id=int(recipe_id)
+                    )
+                except Exception as e:
+                    pass
+                session.add(newUserRecipe)
+                session.commit()
+        return jsonify({"status": "ok"})
+    if request.method == "GET":
+        with create_session() as session:
+            with session.begin():
+                try:
+                    recipe_user = session.query(RecipeUser).filter_by(user_id=user_id).first()
+                    return jsonify({"recipe": json.loads(recipe_user.recipe_json_data)})
+                except Exception as e:
+                    abort(401)
