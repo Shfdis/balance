@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&display=swap');
+*{
+  margin: 2px;
+  padding: 2px;
+
+}
+body{
+  margin-left: 35%;
+  background-color: rgba(248, 243, 238, 1);
+  background-image: linear-gradient(179deg, rgba(248, 243, 238, 1) 0%, rgba(205, 194, 186, 1) 100%);
+  color: rgb(94, 82, 75); 
+  font-family: "Montserrat", serif;
+  font-weight: 300;
+  height: 100vh;
+}
+.libra-icon {
+  margin-left: 1%;
+}
+.icon {
+  display: inline;
+  position: relative;
+  top: 5px;
+}
+.logo {
+  font-weight: 600;
+  font-size: large;
+}
+.logo2 {
+  display: flex;
+  align-items: flex-end;
+}
+.element {
+  margin-bottom: 2%;
+}
+.wrapper {
+  margin: 50px auto;
+}
+.buttonfalse {
+  margin-left: 1%;
+  display: inline;
+  border: 1px solid #000000;
+  border-color: rgb(122, 106, 96);
+  border-width: 1px;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  -webkit-box-shadow: 6px 6px 12px -5px rgba(152, 138, 128, 1);
+  -moz-box-shadow: 6px 6px 12px -5px rgba(152, 138, 128, 1);
+  box-shadow: 6px 6px 12px -5px rgba(152, 138, 128, 1);
+}
+.buttonfalse:hover {
+  color: rgb(51, 59, 42);
+  display: inline;
+  border: 1px solid #000000;
+  border-color: rgb(60, 70, 51);
+  background-color: rgb(141, 162, 121);
+  border-width: 1px;
+  border-radius: 10%;
+  -webkit-box-shadow: 6px 6px 12px -5px rgb(64, 70, 55);
+  -moz-box-shadow: 6px 6px 12px -5px rgb(64, 70, 55);
+  box-shadow: 6px 6px 12px -5px rgb(64, 70, 55);
+}
+.button-active {
+  margin-left: 1%;
+  color: rgb(210, 222, 201);
+  display: inline;
+  border: 1px solid #000000;
+  border-color: rgb(60, 70, 51);
+  background-color: rgb(141, 162, 121);
+  border-width: 1px;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  -webkit-box-shadow: 6px 6px 12px -5px rgb(64, 70, 55);
+  -moz-box-shadow: 6px 6px 12px -5px rgb(64, 70, 55);
+  box-shadow: 6px 6px 12px -5px rgb(64, 70, 55);
+}
+.submit {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 11.8%;
+  color: rgb(94, 82, 75); 
+  background-color: rgb(221, 214, 210);
+  border-color: rgb(122, 106, 96);
+  border-width: 1px;
+  border-radius: 7%;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  -webkit-box-shadow: 8px 8px 17px -5px rgba(152, 138, 128, 1);
+  -moz-box-shadow: 8px 8px 17px -5px rgba(152, 138, 128, 1);
+  box-shadow: 8px 8px 17px -5px rgba(152, 138, 128, 1);
+}
+.submit:hover {
+  background-color: rgb(141, 162, 121);
+  color: rgb(233, 240, 228);
+  border-color: rgb(75, 88, 63);
+  -webkit-box-shadow: 8px 8px 17px -5px rgb(64, 70, 55);
+  -moz-box-shadow: 8px 8px 17px -5px rgb(64, 70, 55);
+  box-shadow: 8px 8px 17px -5px rgb(64, 70, 55);
+}
+.footer {
+  margin-top: 1%;
+  margin-left: 4%;
+}

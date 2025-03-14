@@ -1,0 +1,51 @@
+POST http://localhost:5000/recipes?password=sasi
+Content-Type: application/json
+
+[
+  {
+    "id": 0,
+    "name": "тест рецепт1",
+    "tastes": [
+      {
+        "id": 0,
+        "name": "вкус1"
+      },
+      {
+        "id": 1,
+        "name": ""
+      }
+    ],
+    "default_ingredients": [
+      {
+        "id": 0,
+        "name": "молоко",
+        "value": 0
+      },
+      {
+        "id": 1,
+        "name": "кофе",
+        "value": "4"
+      }
+    ],
+    "change_coefficients": []
+  },
+  {
+    "id": 1,
+    "name": "тест рецепт 2",
+    "tastes": [
+      {
+        "id": 0,
+        "name": "горький"
+      }
+    ],
+    "default_ingredients": [
+      {
+        "id": 0,
+        "name": "карамель",
+        "value": "40"
+      }
+    ],
+    "change_coefficients": []
+  }
+]
+

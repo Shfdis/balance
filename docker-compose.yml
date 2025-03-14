@@ -1,0 +1,45 @@
+services:
+  api:
+    image: python:3.12-slim
+    container_name: api
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             waitress-serve --port=8080 app.main:app"
+    depends_on:
+      - db
+    restart: unless-stopped
+  frontend1:
+    container_name: frontend1
+    build:
+      context: ./frontend1
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+  frontend2:
+    container_name: frontend2
+    build:
+      context: ./frontend2
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+      POSTGRES_DB: balance
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
